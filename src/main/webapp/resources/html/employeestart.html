@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Employee Page</title>
+<link
+	href="https://unpkg.com/tabulator-tables@4.5.3/dist/css/tabulator.min.css"
+	rel="stylesheet">
+<script type="text/javascript"
+	src="https://unpkg.com/tabulator-tables@4.5.3/dist/js/tabulator.min.js"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"
+	integrity="sha256-AdQN98MVZs44Eq2yTwtoKufhnU+uZ7v2kXnD5vqzZVo="
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css"
+	href="/Project1BackendWAR/resources/css/main.css">
+<link rel="stylesheet" type="text/css"
+	href="/Project1BackendWAR/resources/css/tablepages.css">
+</head>
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div id="single-employee-tickets"></div>
+		</div>
+		<div class="row">
+			<div class="col-sm"></div>
+			<div class="col-sm">
+				<button type="button" class="btn btn-primary" data-toggle="modal"
+					data-target=".bd-submission-modal">Submit New Ticket</button>
+				<a class="btn btn-dark" href="http://localhost:8080/Project1BackendWAR/resources/html/index.html" role="button">Logout</a>
+			</div>
+			<div class="col-sm"></div>
+		</div>
+	</div>
+
+	<div class="modal fade bd-submission-modal" tabindex="-1" role="dialog"
+		aria-labelledby="ticketSubmissionModal" aria-hidden="true">
+		<div class="modal-dialog-scrollable" role="document">
+			<div class="modal-content">
+				<form class="contact" id="data" enctype="multipart/form-data"
+					action="/Project1BackendWAR/newticket.json">
+					<div class="form-group row">
+						<label for="fullname" class="col-sm-2 col-form-label">Full
+							name</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control"
+								pattern="^(?:[A-Z][^\s]*\s?)+$" id="fullname" name="fullname">
+						</div>
+					</div>
+					<fieldset class="form-group" id="radioResult">
+						<legend class="col-form-label col-sm-2 pt-0">Reimbursement
+							Type</legend>
+						<div class="row">
+							<div class="col-sm-10">
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="typeRadios"
+										id="typeRadio1" value="Lodging" checked> <label
+										class="form-check-label" for="typeRadio1">Lodging</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="typeRadios"
+										id="typeRadio2" value="Food"> <label
+										class="form-check-label" for="typeRadio2">Food</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="typeRadios"
+										id="typeRadio3" value="Travel"> <label
+										class="form-check-label" for="typeRadio3">Travel</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="typeRadios"
+										id="typeRadio4" value="Other"> <label
+										class="form-check-label" for="typeRadio4">Other</label>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+					<div class="form-group row">
+						<label for="amount" class="col-sm-2 col-form-label">Amount
+							Requested</label>
+						<div class="col-sm-10">
+							<input type="number" class="form-control" min="0.01" step="0.01"
+								max="2500" id="amount" name="amount">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="proofImage" class="col-sm-2 col-form-label">Proof
+							of Purchase</label>
+						<div class="col-sm-10">
+							<label for="proofImageEntry">Select a file:</label> <input
+								type="file" id="proofImageEntry" name="proofImage"
+								class="form-control">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="elaborationEntry" class="col-sm-2 col-form-label">Elaboration</label>
+						<div class="col-sm-10">
+							<textarea id="elaborationEntry" name="elaboration" rows="10"
+								cols="20" class="form-control"></textarea>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-dark" id="submit">Submit
+							Ticket</button>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"
+		integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i"
+		crossorigin="anonymous"></script>
+	<script type="text/javascript" src="resources/javascript/tabularemp.js"></script>
+	<script type="text/javascript"
+		src="resources/javascript/submissionlogic.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
+</body>
+</html>

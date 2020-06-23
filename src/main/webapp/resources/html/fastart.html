@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Financial Advisor Page</title>
+<link
+	href="https://unpkg.com/tabulator-tables@4.5.3/dist/css/tabulator.min.css"
+	rel="stylesheet">
+<script type="text/javascript"
+	src="https://unpkg.com/tabulator-tables@4.5.3/dist/js/tabulator.min.js"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"
+	integrity="sha256-AdQN98MVZs44Eq2yTwtoKufhnU+uZ7v2kXnD5vqzZVo="
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="/Project1BackendWAR/resources/css/main.css">
+<link rel="stylesheet" type="text/css" href="/Project1BackendWAR/resources/css/tablepages.css">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div id="open-employee-tickets"></div>
+			<div class="row">
+				<div class="col-sm">
+					<form method="post" action="/Project1BackendWAR/statuschange.json">
+						<div class="form-group">
+							<label for="ticketId" class="p-3 mb-2 bg-dark text-white">Ticket Id</label> <input type="text"
+								class="form-control" id="ticketId"
+								aria-describedby="approvalHelp" name="ticketId"> <small
+								id="approvalHelp" class="form-text p-3 mb-2 bg-dark text-white">Type in a
+								ticket id number and select either 'Approve' or 'Deny' to
+								approve or deny the ticket.</small>
+						</div>
+						<fieldset class="form-group">
+							<div class="form-check">
+								<input class="form-check-input" type="radio" name="actionRadios"
+									id="actionRadio1" value="Approve" checked> <label
+									class="form-check-label p-3 mb-2 bg-dark text-white" for="actionRadio1">Approve</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="radio" name="actionRadios"
+									id="actionRadio2" value="Deny"> <label
+									class="form-check-label p-3 mb-2 bg-dark text-white" for="actionRadio2">Deny</label>
+							</div>
+						</fieldset>
+						<button type="submit" class="btn btn-dark" id="submitButton"
+							onClick="processTicket()">Submit</button>
+					</form>
+				</div>
+				<div class="col-sm">
+					<a class="btn btn-dark" href="http://localhost:8080/Project1BackendWAR/resources/html/index.html" role="button">Logout</a>
+				</div>
+				<div class="col-sm">
+					<form method="post" action="/Project1BackendWAR/ch.change">
+						<div class="form-group">
+							<label for="inputhistoryuser" class="p-3 mb-2 bg-dark text-white">View Customer History</label> <select id="inputhistoryuser"
+								class="form-control" name="historycust">
+								<option selected>Choose a user...</option>
+							</select>
+						</div>
+						<button type="submit" class="btn btn-dark" id="submitButton">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript"
+		src="resources/javascript/tabularopen.js"></script>
+	<script type="text/javascript" src="resources/javascript/fastartDOM.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
+</body>
+</html>
