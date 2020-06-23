@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+        
+    <!-- Tells Spring we are using annotations -->
+	<context:annotation-config/>
+	<context:component-scan base-package="chungoose"></context:component-scan>
+	
+	<!-- To turn on Spring ORM annotations -->
+	<tx:annotation-driven/>
+	
+	<!-- Turn on Spring MVC annotations -->
+	<mvc:annotation-driven/>
+	
+	<!-- Bean configuration for JavaMail -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com"/>
+        <property name="port" value="587"/>
+        <property name="username" value="judson5365@gmail.com"/>
+        <property name="password" value="Yaminick5"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <!-- Preconfigured email example -->
+    <bean id="preConfiguredMessage" class="org.springframework.mail.SimpleMailMessage">
+        <property name="to" value="somebody@gmail.com"></property>
+        <property name="from" value="admin@gmail.com"></property>
+        <property name="subject" value="FATAL - Application crash. Save your job !!"/>
+    </bean>
+	
+	<!-- DATASOURCE
+			This bean is a JDBC instance, it is an object that holds all
+			of the attributes that are necessary to connect to any DB -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<!-- <property name="username" value="#{systemEnvironment['environmentVariableName']}"></property> -->
+		<property name="driverClassName" value="org.postgresql.Driver"></property>
+		<property name="url" value="jdbc:postgresql://rev-chan.csealuzhvl1n.us-east-1.rds.amazonaws.com:5432/chungoosetest"></property>
+		<property name="username" value="chungoosetester"></property>
+		<property name="password" value="password"></property>
+	</bean>
+	
+	<!-- SESSION FACTORY 
+			This will be a bean that is responsible for creating the
+			hibernate sessions (bean is a hibernate instance).-->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="packagesToScan" value="chungoose.model"></property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.format_sql">false</prop>
+				<prop key="hibernate.hbm2ddl.auto">none</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+         
+</beans>
+
+
+<!-- We need to uncomment mvc config and web.xml servlet info and move this into WEB-INF
+once we set up our servlets!!! -->

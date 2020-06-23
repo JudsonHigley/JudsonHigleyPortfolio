@@ -1,0 +1,15 @@
+TODO
+1. Annoyances
+-Figure out why dates aren't loading into the tabular table.
+--submission dates have a type problem
+--resolution dates are never being created at all
+-close button
+-add logout functionality
+
+5. Extra for after presentation
+-make response pages work instead of having a blank page that has to be backed out of
+-add in cool functionality to the table
+-move elements around for visual appeal
+-implement images
+-highlight approved tickets green, denied tickets red and open tickets white in history lists (implementation on 
+bootstrap)
